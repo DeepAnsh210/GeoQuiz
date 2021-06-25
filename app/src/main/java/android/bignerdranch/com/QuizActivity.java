@@ -14,6 +14,7 @@ public class QuizActivity extends AppCompatActivity {
     private Button mNextButton;
     private Button mPrevButton;
     private TextView mQuestionTextView;
+    //this is my ajuba comment
 
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_australia, true),
