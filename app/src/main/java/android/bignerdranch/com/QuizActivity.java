@@ -13,6 +13,9 @@ public class QuizActivity extends AppCompatActivity {
     //Adding tag constant for log statement in onCreate() method
     private static final String TAG = "QuizActivity";
 
+    //key for the key-value pair that will be stored in the bundle
+    private static final String KEY_INDEX = "index";
+
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
@@ -36,6 +39,11 @@ public class QuizActivity extends AppCompatActivity {
         //Adding log statement
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
+
+        //Getting saved index from bundle
+        if(savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+        }
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         mQuestionTextView.setText(mQuestionBank[mCurrentIndex].getTextResId());
@@ -108,6 +116,14 @@ public class QuizActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         Log.d(TAG, "onPause() called");
+    }
+
+    //For saving index on rotation
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.d(TAG, "onSaveInstanceState() called");
+        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
     }
 
     @Override
